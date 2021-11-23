@@ -1,2 +1,4 @@
+# Skip all logging files
 *.log
+# Skip HFToken
 HaveFunToken.py
