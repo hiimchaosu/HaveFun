@@ -20,5 +20,7 @@ async def on_message(message):
         return;
     if "@everyone" in message.content:
         await message.channel.send('<:ping:768891917848281119> {0}'.format(message.author.mention));
-
+    if "matura" in message.content:
+        await message.channel.send(
+            'Matury zaczynają się 4 Maja 2022, środa o godz. 9.00. Szykuj dupe <@!697518297096257577>')
 client.run(HFToken());
