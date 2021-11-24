@@ -15,7 +15,7 @@ def maturka_time(): #Counting days inbetwen two dates.
     current_date = datetime.date.today()
     target_date = datetime.date(2022, 5, 4)
     days_diff = target_date - current_date
-    print(days_diff.days)
+    return days_diff.days
 
 @client.event
 async def on_ready():
