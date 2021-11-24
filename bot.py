@@ -46,7 +46,7 @@ async def on_message(message):
 
 @bot.command(name="R6") #Commands for BM side of the server as for now I guess - KaKari
 async def ping_for_R6(channel):
-    await channel.send("Its time for a game of R6 honey: <@!404579956874674176>, <@!230697738784735232>, <@!532665219927769099>, <@!697518297096257577>, <@!300652757000519680>")
+    await channel.send("Its time for a game of R6 honey: <@!404579956874674176>, <@!230697738784735232>, <@!532665219927769099>, <@!697518297096257577>, <@!300652757000519680>, <@!378627693606076444>")
 
 
 @client.event  # Ping user when he's typing anything - Chaosu
