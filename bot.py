@@ -1,3 +1,6 @@
+import asyncio
+from time import sleep
+
 import discord
 import logging
 import datetime
@@ -29,7 +32,7 @@ async def on_ready():
 @bot.event  # whatever is down here, its mine - KaKari
 async def on_message(message):
     if message.author == bot.user:
-        return;
+        return
     if "matura" in message.content:
         await message.channel.send(
             f'Matury zaczynają się 4 Maja 2022, środa o godz. 9.00. Szykuj dupe <@!697518297096257577>, bo zostało ci {maturka_time()} dni. ')
@@ -45,8 +48,11 @@ async def R6(channel):
 # Ping user when he's typing anything - Chaosu
 @bot.event
 async def on_typing(channel, user, when):
-    if channel.id == 912763830969454602:
-        print(f"{user} is typing message in {channel} {when}")  # Additional comment for console output
-        # await channel.send('Widze jak tam sobie piszesz {0}'.format(user.mention)) - TODO - ping every now and then, not fucking spam pings lmao
+    pass
+
+    #print(when.second - 60)
+    #if channel.id == 912763830969454602:
+    #    print(f"{user} is typing message in {channel} {when}")  # Additional comment for console output
+    #    await channel.send('Widze jak tam sobie piszesz {0}'.format(user.mention)) # - TODO - ping every now and then, not fucking spam pings lmao
 
 bot.run(HFToken())
