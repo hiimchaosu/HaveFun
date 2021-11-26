@@ -9,7 +9,6 @@ from HaveFunToken import HFToken
 
 # set bot's prefix to '$'
 bot = commands.Bot(command_prefix='$')
-#client = discord.Client()
 
 logger = logging.getLogger('discord')
 logger.setLevel(logging.DEBUG)
@@ -40,19 +39,31 @@ async def on_message(message):
         await message.channel.send('<:ping:768891917848281119> {0}'.format(message.author.mention))
     await bot.process_commands(message)
 
-@bot.command() # Commands for BM side of the server as for now I guess - KaKari - TODO tidy up R6 role, then change to ping the role
+# Commands for BM side of the server as for now I guess - KaKari - TODO tidy up R6 role, then change to ping the role
+
+@bot.command()
 async def R6(channel):
     emote = "<:kitkuPaf:848926844832186388>"
-    await channel.send(f"Its time for a game of R6 honey: <@!404579956874674176> {emote} <@!230697738784735232> {emote} <@!532665219927769099> {emote} <@!697518297096257577> {emote} <@!300652757000519680> {emote} <@!378627693606076444>")
+    await channel.send(f"It's time for a game of R6 honey: <@!404579956874674176> {emote} <@!230697738784735232> {emote} <@!532665219927769099> {emote} <@!697518297096257577> {emote} <@!300652757000519680> {emote} <@!378627693606076444>")
 
-# Ping user when he's typing anything - Chaosu
+# For now it stays as a command to test it's functionality - TODO a command to check how long has someone spent on AFK status, by checking AFK room on the server
+
+@bot.command()
+async def AFK(channel):
+    channelAFK = bot.get_channel(339789195767709697)
+    AFKmembers = channelAFK.members
+    AFKmemids = []
+    for AFKmember in AFKmembers:
+        AFKmemids.append(AFKmember.id)
+    await channel.send(AFKmemids)
+
+# TODO - Ping user when he's typing anything, when I'm fucking ready for it - Chaosu
 @bot.event
 async def on_typing(channel, user, when):
     pass
-
     #print(when.second - 60)
     #if channel.id == 912763830969454602:
     #    print(f"{user} is typing message in {channel} {when}")  # Additional comment for console output
-    #    await channel.send('Widze jak tam sobie piszesz {0}'.format(user.mention)) # - TODO - ping every now and then, not fucking spam pings lmao
+    #    await channel.send('Widze jak tam sobie piszesz {0}'.format(user.mention))
 
 bot.run(HFToken())
