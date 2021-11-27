@@ -1,6 +1,3 @@
-import asyncio
-from time import sleep
-
 import discord
 import logging
 import datetime
@@ -17,6 +14,7 @@ handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(me
 logger.addHandler(handler)
 
 intents = discord.Intents.all()
+intents.members = True
 
 def maturka_time():  # Counting days inbetween two dates.
     current_date = datetime.date.today()
@@ -24,9 +22,10 @@ def maturka_time():  # Counting days inbetween two dates.
     days_left = target_date - current_date
     return days_left.days
 
-@bot.event # wait for bot's responsiveness
+@bot.event # wait for bot's responsiveness and set it's status
 async def on_ready():
     print('{0.user} online and operating.'.format(bot))
+    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="his incompetent coder"))
 
 @bot.event  # whatever is down here, its mine - KaKari
 async def on_message(message):
@@ -49,13 +48,13 @@ async def R6(channel):
 # For now it stays as a command to test it's functionality - TODO a command to check how long has someone spent on AFK status, by checking AFK room on the server
 
 @bot.command()
-async def AFK(channel):
-    channelAFK = bot.get_channel(339789195767709697)
-    AFKmembers = channelAFK.members
+async def AFK():
+    channelAFK = bot.get_channel(746348405906735174)  # Gets the channel test, 339789195767709697 - for test
+    AFKmembers = channelAFK.members  # Finds members connected to the channel
     AFKmemids = []
     for AFKmember in AFKmembers:
         AFKmemids.append(AFKmember.id)
-    await channel.send(AFKmemids)
+    print(AFKmemids)
 
 # TODO - Ping user when he's typing anything, when I'm fucking ready for it - Chaosu
 @bot.event
