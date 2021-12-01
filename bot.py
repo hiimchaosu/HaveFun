@@ -51,8 +51,23 @@ async def on_message(message):
 @bot.command()
 async def R6(channel):
     emote = "<:kitkuPaf:848926844832186388>"
-    await channel.send(
-        f"It's time for a game of R6 honey: <@!404579956874674176> {emote} <@!230697738784735232> {emote} <@!532665219927769099> {emote} <@!697518297096257577> {emote} <@!300652757000519680> {emote} <@!378627693606076444>")
+    await channel.send(f"Its time for a game of R6 honey: <@!404579956874674176> {emote} <@!230697738784735232> {emote} <@!532665219927769099> {emote} <@!697518297096257577> {emote} <@!300652757000519680> {emote} <@!378627693606076444>")
+    message_R6 = [await channel.send("17.30-18.30"),
+                await channel.send("18.30-19.30"),
+                await channel.send("19.30-20.30")]
+    #embed = discord.Embed(title='Testy', color=0x00ff00) - This lil guy makes a fancy little box. Saved to play with later
+    for i in message_R6:
+        await i.add_reaction("<:GHOk:793607140735451156>")
+
+@bot.event
+async def on_raw_reaction_add(payload):
+    if payload.channel_id == 912763830969454602:
+        if payload.emoji.name == "<:GHOk:793607140735451156>":
+            channel = bot.get_channel(912763830969454602)
+            message = await channel.fetch_message(payload.message_id)
+            reaction = discord.utils.get(message.reactions, emoji=payload.emoji.name)
+            if reaction and reaction.count > 1:
+                await print(reaction.count)
 
 # TODO a command to check how long has someone spent on AFK status, by checking AFK room on the server
 # TODO - Ping user when he's typing anything, when I'm fucking ready for it - Chaosu
