@@ -11,17 +11,27 @@ class music(commands.Cog):
         if ctx.author.voice is None:
             await ctx.send("You're not in a Voice Channel.")
         if ctx.voice_client is None:
-            await voice_channel.connect()
             await ctx.send("Joining channel: " + str(voice_channel))
+            print("Joining channel: " + str(voice_channel) + " on command of " + str(ctx.author.display_name))
+            await voice_channel.connect()
         else:
-            await ctx.voice_client.move_to(voice_channel)
             await ctx.send("Moving to: " + str(voice_channel))
+            print("Moving to: " + str(voice_channel) + " on command of " + str(ctx.author.display_name))
+            await ctx.voice_client.move_to(voice_channel)
     @commands.command()
     async def disconnect(self, ctx):
         await ctx.voice_client.disconnect()
         await ctx.send("Disconnecting...")
     @commands.command()
     async def play(self, ctx, url):
+        voice_channel = ctx.author.voice.channel
+        if ctx.author.voice is None:
+            await ctx.send("You're not in a Voice Channel.")
+        if ctx.voice_client is None:
+            await ctx.send("Joining channel: " + str(voice_channel))
+            print("Joining channel: " + str(voice_channel) + " on command of " + str(ctx.author.display_name) + " and playing: " + url)
+            await voice_channel.connect()
+
         ctx.voice_client.stop()
         FFMPEG_OPTIONS = {
             'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options': '-vn'
