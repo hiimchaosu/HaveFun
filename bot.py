@@ -1,22 +1,15 @@
 import discord
-import logging
 import datetime
 from discord.ext import commands
 from HaveFunToken import HFToken
 import music
+import discordLogging
 
 bot = commands.Bot(command_prefix='$', intents = discord.Intents.all())
 
-cogs = [music]
+cogs = [music, discordLogging]
 for i in range(len(cogs)):
     cogs[i].setup(bot)
-
-logger = logging.getLogger('discord')
-logger.setLevel(logging.DEBUG)
-handler = logging.FileHandler(filename='discord.log', encoding='utf-8', mode='w')
-handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
-logger.addHandler(handler)
-
 
 
 def maturka_time():  # Counting days inbetween two dates.
@@ -69,7 +62,7 @@ async def on_raw_reaction_add(payload):
             if reaction and reaction.count > 1:
                 await print(reaction.count)
 
-# TODO a command to check how long has someone spent on AFK status, by checking AFK room on the server
+# TODO - command to check how long has someone spent on AFK status, by checking AFK room on the server
 # TODO - Ping user when he's typing anything, when I'm fucking ready for it - Chaosu
 # TODO - Sort out the commands for specific actions into different files? just like music.py (work on cogs)
 bot.run(HFToken())
