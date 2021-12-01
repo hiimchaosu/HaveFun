@@ -2,3 +2,9 @@
 *.log
 # Skip HFToken
 HaveFunToken.py
+# Skip venv
+venv
+# Skip ffmpeg library
+*.exe
+# Skip audio files
+*.mp3
