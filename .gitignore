@@ -1,5 +1,5 @@
 # Skip all logging files
-*.log
+logs
 # Skip HFToken
 HaveFunToken.py
 # Skip venv
