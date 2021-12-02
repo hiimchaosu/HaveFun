@@ -4,10 +4,11 @@ from discord.ext import commands
 from HaveFunToken import HFToken
 import music
 import discordLogging
+import tatsuReaction
 
 bot = commands.Bot(command_prefix='$', intents = discord.Intents.all())
 
-cogs = [music, discordLogging]
+cogs = [music, discordLogging, tatsuReaction]
 for i in range(len(cogs)):
     cogs[i].setup(bot)
 
