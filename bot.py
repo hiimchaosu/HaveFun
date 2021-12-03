@@ -26,7 +26,6 @@ async def on_ready():
     await bot.change_presence(
         activity=discord.Activity(type=discord.ActivityType.listening, name="his incompetent coder"))
 
-
 @bot.event  # whatever is down here, its mine - KaKari
 async def on_message(message):
     print(f"{message.channel}: {message.author}: {message.content}")
@@ -38,7 +37,6 @@ async def on_message(message):
     if "@everyone" in message.content:
         await message.channel.send('<:ping:768891917848281119> {0}'.format(message.author.mention))
     await bot.process_commands(message)
-
 
 # Commands for BM side of the server as for now I guess - KaKari - TODO tidy up R6 role, then change to ping the role
 
