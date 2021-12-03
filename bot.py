@@ -6,25 +6,24 @@ import music
 import discordLogging
 import tatsuReaction
 
-bot = commands.Bot(command_prefix='$', intents = discord.Intents.all())
+bot = commands.Bot(command_prefix='$', intents = discord.Intents.all(), case_insensitive=True)
 
 cogs = [music, discordLogging, tatsuReaction]
 for i in range(len(cogs)):
     cogs[i].setup(bot)
 
-
-def maturka_time():  # Counting days inbetween two dates.
+# Counting days inbetween two dates.
+def maturka_time():
     current_date = datetime.date.today()
     target_date = datetime.date(2022, 5, 4)
     days_left = target_date - current_date
     return days_left.days
 
-
-@bot.event  # wait for bot's responsiveness and set it's status
+# wait for bot's responsiveness and set it's status
+@bot.event
 async def on_ready():
     print('{0.user} online and operating.'.format(bot))
-    await bot.change_presence(
-        activity=discord.Activity(type=discord.ActivityType.listening, name="his incompetent coder"))
+    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="his incompetent coder"))
 
 @bot.event  # whatever is down here, its mine - KaKari
 async def on_message(message):
@@ -38,8 +37,6 @@ async def on_message(message):
         await message.channel.send('<:ping:768891917848281119> {0}'.format(message.author.mention))
     await bot.process_commands(message)
 
-# Commands for BM side of the server as for now I guess - KaKari - TODO tidy up R6 role, then change to ping the role
-
 @bot.command()
 async def R6(channel):
     emote = "<:kitkuPaf:848926844832186388>"
@@ -51,15 +48,15 @@ async def R6(channel):
     for i in message_R6:
         await i.add_reaction("<:GHOk:793607140735451156>")
 
-@bot.event
-async def on_raw_reaction_add(payload):
-    if payload.channel_id == 912763830969454602:
-        if payload.emoji.name == "<:GHOk:793607140735451156>":
-            channel = bot.get_channel(912763830969454602)
-            message = await channel.fetch_message(payload.message_id)
-            reaction = discord.utils.get(message.reactions, emoji=payload.emoji.name)
-            if reaction and reaction.count > 1:
-                await print(reaction.count)
+#@bot.event
+#async def on_raw_reaction_add(payload):
+#    if payload.channel_id == 912763830969454602:
+#        if payload.emoji.name == "<:GHOk:793607140735451156>":
+#            channel = bot.get_channel(912763830969454602)
+#            message = await channel.fetch_message(payload.message_id)
+#            reaction = discord.utils.get(message.reactions, emoji=payload.emoji.name)
+#            if reaction and reaction.count > 1:
+#                print(reaction.count)
 
 # TODO - command to check how long has someone spent on AFK status, by checking AFK room on the server
 # TODO - Ping user when he's typing anything, when I'm fucking ready for it - Chaosu
