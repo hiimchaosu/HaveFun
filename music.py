@@ -57,5 +57,7 @@ class music(commands.Cog):
         await ctx.voice_client.resume()
         await ctx.send("Resumed.")
 
+# TODO - Make a timer with a song, more info about currently playing song
+
 def setup(client):
     client.add_cog(music(client))
