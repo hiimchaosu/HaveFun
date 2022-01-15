@@ -5,7 +5,7 @@ import datetime
 class botCommands(commands.Cog):
     def __init__(self, client):
         self.client = client
-    # Simple help command for now TODO - REWRITE THIS SHIT XD
+    # Simple help command for now TODO - REWRITE THIS XD
     @commands.command()
     async def help(self, ctx):
         await ctx.send("As for now the commands are as follows: ")
