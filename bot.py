@@ -17,7 +17,7 @@ for i in range(len(cogs)):
 @bot.event
 async def on_ready():
     print('{0.user} online and operating.'.format(bot))
-    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="his incompetent coder"))
+    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="your wishes"))
 
 @bot.event  # whatever is down here, its mine - KaKari
 async def on_message(message):
@@ -39,6 +39,5 @@ async def on_message(message):
 #                print(reaction.count)
 
 # TODO - command to check how long has someone spent on AFK status, by checking AFK room on the server
-# TODO - Ping user when he's typing anything, when I'm fucking ready for it - Chaosu
-# TODO - Sort out the commands for specific actions into different files? just like music.py (work on cogs)
+# TODO - Ping user when he's typing anything, when I'm ready for it - Chaosu
 bot.run(HFToken())
