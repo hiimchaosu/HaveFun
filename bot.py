@@ -19,7 +19,7 @@ async def on_ready():
     print('{0.user} online and operating.'.format(bot))
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="your wishes"))
 
-@bot.event  # whatever is down here, its mine - KaKari
+@bot.event
 async def on_message(message):
     print(f"{message.channel}: {message.author}: {message.content}")
     if message.author == bot.user:
@@ -28,16 +28,9 @@ async def on_message(message):
         await message.channel.send('<:ping:768891917848281119> {0}'.format(message.author.mention))
     await bot.process_commands(message)
 
-#@bot.event
-#async def on_raw_reaction_add(payload):
-#    if payload.channel_id == 912763830969454602:
-#        if payload.emoji.name == "<:GHOk:793607140735451156>":
-#            channel = bot.get_channel(912763830969454602)
-#            message = await channel.fetch_message(payload.message_id)
-#            reaction = discord.utils.get(message.reactions, emoji=payload.emoji.name)
-#            if reaction and reaction.count > 1:
-#                print(reaction.count)
-
 # TODO - command to check how long has someone spent on AFK status, by checking AFK room on the server
-# TODO - Ping user when he's typing anything, when I'm ready for it - Chaosu
+# TODO - write code for reminder about whatever event ex. ($reminder 2000 today Przypomnij o filmie)
+# TODO - calendar with server events
+# TODO(?) - storage for some links(?) make a database for storing stuff
+
 bot.run(HFToken())
