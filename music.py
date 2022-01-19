@@ -28,8 +28,7 @@ class music(commands.Cog):
         if ctx.author.voice is None:
             await ctx.send("You're not in a Voice Channel.")
         if ctx.voice_client is None:
-            await ctx.send("Joining channel: " + str(voice_channel))
-            print("Joining channel: " + str(voice_channel) + " on command of " + str(ctx.author.display_name) + " and playing: " + url)
+            await ctx.send("Joining channel: " + str(voice_channel) + " on command of " + str(ctx.author.display_name) + " and playing: " + url)
             await voice_channel.connect()
 
         ctx.voice_client.stop()
@@ -58,6 +57,7 @@ class music(commands.Cog):
         await ctx.send("Resumed.")
 
 # TODO - Make a timer with a song, more info about currently playing song
+# TODO - Maybe add looping of a song function?
 
 def setup(client):
     client.add_cog(music(client))
