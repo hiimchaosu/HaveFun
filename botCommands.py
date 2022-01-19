@@ -10,7 +10,7 @@ class botCommands(commands.Cog):
     async def help(self, ctx):
         await ctx.send("As for now the commands are as follows: ")
         embed = discord.Embed(title='List of commands:', color=0x00ff00)
-        embed.set_author(name="hiimChaosu",icon_url="https://avatars.githubusercontent.com/u/25712415?v=4",url="https://github.com/hiimchaosu")
+        embed.set_author(name="hiimChaosu.",icon_url="https://avatars.githubusercontent.com/u/25712415?v=4",url="https://github.com/hiimchaosu")
         embed.add_field(name="R6", value="A command made by KaKari for (insert desc here)",inline=False)
         embed.add_field(name="play [yt-url]", value="Command for simple music bot",inline=False)
         embed.add_field(name="join", value="If you are feeling lonely, I can come join you :)",inline=False)
