@@ -33,10 +33,11 @@ class botCommands(commands.Cog):
     async def R6(self, channel):
         emote = "<:kitkuPaf:848926844832186388>"
         await channel.send(
-            f"Its time for a game of R6 honey: {emote} <@!754314805438840955> {emote}")
+            f"Its time for a game of R6 honey: {emote} <@&754314805438840955> {emote}")
         message_R6 = [await channel.send("19.30-20.00"),
                       await channel.send("20.00-20.30"),
-                      await channel.send("20.30-21.00")]
+                      await channel.send("20.30-21.00"),
+                      await channel.send("Pass aka <!@300652757000519680 mówiący jutro")]
         for i in message_R6:
             await i.add_reaction("<:GHOk:793607140735451156>")
 

@@ -28,6 +28,13 @@ async def on_message(message):
         await message.channel.send('<:ping:768891917848281119> {0}'.format(message.author.mention))
     await bot.process_commands(message)
 
+@bot.event
+async def on_message(message):
+    print(f"{message.channel}: {message.author}: {message.content}")
+    if message.channel.id == 746329009691951135 & message.author.id == 300652757000519680 & "jutro" in message.content:
+        await message.channel.send('<:PepeClown:768892735499272222> '.format(message.author.mention))
+    await bot.process_commands(message)
+
 # TODO - command to check how long has someone spent on AFK status, by checking AFK room on the server
 # TODO - write code for reminder about whatever event ex. ($reminder 2000 today Przypomnij o filmie)
 # TODO - calendar with server events
