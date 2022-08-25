@@ -11,6 +11,7 @@ with open("HaveFunToken.json") as f:
     data = json.load(f)
 HFToken = data["TOKEN"]
 
+
 async def load():
     for filename in os.listdir("./cogs"):
         if filename.endswith(".py"):
@@ -22,7 +23,6 @@ async def main():
     async with bot:
         await bot.start(HFToken)
 
-    # TODO - command to check how long has someone spent on AFK status, by checking AFK room on the server
     # TODO - write code for reminder about whatever event ex. ($reminder 2000 today Przypomnij o filmie)
     # TODO - calendar with server events
     # TODO(?) - storage for some links(?) make a database for storing stuff
