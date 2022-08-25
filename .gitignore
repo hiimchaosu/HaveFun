@@ -8,3 +8,5 @@ venv
 *.exe
 # Skip audio files
 *.mp3
+# Skip json files
+*.json
