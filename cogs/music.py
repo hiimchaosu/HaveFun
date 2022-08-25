@@ -59,5 +59,5 @@ class music(commands.Cog):
 # TODO - Make a timer with a song, more info about currently playing song
 # TODO - Maybe add looping of a song function?
 
-def setup(client):
-    client.add_cog(music(client))
+async def setup(client):
+    await client.add_cog(music(client))

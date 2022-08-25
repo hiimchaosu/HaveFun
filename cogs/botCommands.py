@@ -1,10 +1,32 @@
 import discord
+#from discord import app_commands
 from discord.ext import commands
 import datetime
+import random
+
 
 class botCommands(commands.Cog):
-    def __init__(self, client):
-        self.client = client
+    def __init__(self, bot):
+        self.bot = bot
+
+    @commands.Cog.listener()
+    async def on_ready(self):
+        print('Bot ready.')
+        print('Cog: Commands loaded.')
+    @commands.Cog.listener()
+    async def on_message(self, message):
+        print(f"{message.channel}: {message.author}: {message.content}")
+        if message.author == self.bot.user:
+            return
+        if "@everyone" in message.content:
+            await message.channel.send('<:ping:768891917848281119> {0}'.format(message.author.mention))
+        if message.channel.id == 746329009691951135 & message.author.id == 300652757000519680 & "jutro" in message.content:
+            await message.channel.send('<:PepeClown:768892735499272222> '.format(message.author.mention))
+
+    #@app_commands.command(
+    #    name = "help",
+    #    description="Basic help function.")
+
     # Simple help command for now TODO - Maybe make it more... nice looking?
     @commands.command()
     async def help(self, ctx):
@@ -30,6 +52,11 @@ class botCommands(commands.Cog):
         await ctx.message.channel.send(f'Matury zaczynają się 4 Maja 2022, środa o godz. 9.00. Szykuj dupe <@!697518297096257577>, bo zostało ci {days_left.days} dni.')
 
     @commands.command()
+    async def essa(self, ctx):
+        poziomEssy = random.ranint(0,100)
+        await ctx.message.channel.send(f'Poziom essy: {poziomEssy}')
+
+    @commands.command()
     async def R6(self, channel):
         emote = "<:kitkuPaf:848926844832186388>"
         await channel.send(
@@ -41,5 +68,5 @@ class botCommands(commands.Cog):
         for i in message_R6:
             await i.add_reaction("<:GHOk:793607140735451156>")
 
-def setup(client):
-    client.add_cog(botCommands(client))
+async def setup(bot):
+    await bot.add_cog(botCommands(bot))

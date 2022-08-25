@@ -18,5 +18,5 @@ class tatsuReaction(commands.Cog):
                 picture = discord.File(f)
             await message.channel.send("Widzeee {nickname}".format(nickname = message.author.mention), file = picture)
 
-def setup(client):
-    client.add_cog(tatsuReaction(client))
+async def setup(client):
+    await client.add_cog(tatsuReaction(client))
