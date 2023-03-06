@@ -1,12 +1,10 @@
 # Skip all logging files
 logs
 # Skip HFToken
-HaveFunToken.py
+token.0
 # Skip venv
 venv
 # Skip ffmpeg library
 *.exe
 # Skip audio files
 *.mp3
-# Skip json files
-*.json
