@@ -2,6 +2,7 @@ import asyncio
 import datetime as dt
 import typing as t
 import re
+
 URL_REGEX = r"(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))"
 OPTIONS = {
     "1️⃣": 0,
@@ -46,18 +47,11 @@ class Queue:
         return not self._queue
 
     @property
-    def first_track(self):
-        if not self._queue:
-            raise QueueIsEmpty
-
-        return self._queue[0]
-
-    @property
     def current_track(self):
         if not self._queue:
             raise QueueIsEmpty
-
-        return self._queue[self.position]
+        if self.position <= len(self._queue) - 1:
+            return self._queue[self.position]
 
     @property
     def upcoming(self):
@@ -80,12 +74,6 @@ class Queue:
     def add(self, *args):
         self._queue.extend(args)
 
-    def get_first_track(self):
-        if not self._queue:
-            raise QueueIsEmpty
-
-        return self._queue[0]
-
     def get_next_track(self):
         if not self._queue:
             raise QueueIsEmpty
@@ -97,7 +85,8 @@ class Queue:
         return self._queue[self.position]
 
     def empty(self):
-        return self._queue.clear()
+        self._queue.clear()
+        self.position = 0
 
 
 class Player(wavelink.Player):
@@ -172,7 +161,7 @@ class Player(wavelink.Player):
             return tracks[OPTIONS[reaction.emoji]]
 
     async def start_playback(self):
-        await self.play(self.queue.first_track)
+        await self.play(self.queue.current_track)
 
     async def advance(self):
         try:
@@ -276,7 +265,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
             await ctx.send("No songs to be played.")
 
     @commands.command(name="queue", aliases=["q"])
-    async def queue_command(self, ctx, show: t.Optional[int] = 10):
+    async def queue_command(self, ctx, show: t.Optional[int] = 5):
         player = self.get_player(ctx)
         if player.queue.is_empty:
             raise QueueIsEmpty
@@ -289,7 +278,11 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
         )
         embed.set_author(name="Query Results")
         embed.set_footer(text=f"Requested by {ctx.author.display_name}", icon_url=ctx.author.avatar_url)
-        embed.add_field(name="Currently playing ", value=player.queue.current_track.title, inline=False)
+        embed.add_field(
+            name="Currently playing ",
+            value=getattr(player.queue.current_track, "title", "No tracks are currently playing"),
+            inline=False
+        )
         if upcoming := player.queue.upcoming:
             embed.add_field(
                 name="Next up",
