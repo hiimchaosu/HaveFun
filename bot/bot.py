@@ -3,6 +3,7 @@ from pathlib import Path
 import discord
 from discord.ext import commands
 
+VERSION = "0.1.3"
 
 class HaveFun(commands.Bot):
     def __init__(self):
@@ -10,6 +11,7 @@ class HaveFun(commands.Bot):
         super().__init__(
             command_prefix=self.prefix,
             case_insensitive=True,
+            help_command=None,
             intents=discord.Intents.all()
         )
 
@@ -30,6 +32,7 @@ class HaveFun(commands.Bot):
 
         print("Running bot...")
         super().run(TOKEN, reconnect=True)
+        
 
     async def shutdown(self):
         print("Closing connection to Discord...")
@@ -48,18 +51,19 @@ class HaveFun(commands.Bot):
     async def on_disconnect(self):
         print("Bot disconnected...")
 
-    # async def on_error(self, err, *args, **kwargs):
-    #     raise
-    #
-    # async def on_command_error(self, ctx, exc):
-    #     raise getattr(exc, "original", ctx)
+    async def on_error(self, err, *args, **kwargs):
+        raise
+    
+    async def on_command_error(self, ctx, exc):
+        raise getattr(exc, "original", ctx)
 
     async def on_ready(self):
         self.client_id = (await self.application_info()).id
         print("Bot ready.")
+        await self.change_presence(activity=discord.Game(name=f"v{VERSION} | $help"))
 
     async def prefix(self, bot, msg):
-        return commands.when_mentioned_or("*")(bot, msg)
+        return commands.when_mentioned_or("$")(bot, msg)
 
     async def process_commands(self, msg):
         ctx = await self.get_context(msg, cls=commands.Context)
