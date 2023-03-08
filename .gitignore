@@ -1,10 +1,8 @@
 # Skip all logging files
 logs
-# Skip HFToken
+# Skip HaveFun token
 token.0
 # Skip venv
 venv
-# Skip ffmpeg library
-*.exe
 # Skip audio files
 *.mp3
