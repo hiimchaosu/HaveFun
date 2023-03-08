@@ -16,53 +16,6 @@ class botCommands(commands.Cog):
         if message.channel.id == 746329009691951135 & message.author.id == 300652757000519680 & "jutro" in message.content:
             await message.channel.send('<:PepeClown:768892735499272222> '.format(message.author.mention))
 
-    # @app_commands.command(
-    #    name = "help",
-    #    description="Basic help function.")
-
-    # Simple help command for now TODO - Maybe make it more... nice looking?
-
-    @commands.command(name="help", aliases=["h"])
-    async def help(self, ctx):
-        embed = discord.Embed(
-            title='List of music commands:',
-            colour=ctx.author.colour)
-        embed.set_author(name="hiimChaosu", icon_url="https://avatars.githubusercontent.com/u/25712415?v=4",
-                         url="https://github.com/hiimchaosu")
-        # embed.add_field(name="", value="", inline=False)
-        embed.add_field(name="connect", value="[$connect (channel_name)] - connect to a channel", inline=False)
-        embed.add_field(name="play/p",
-                        value="[$play/$p (SONG_URL / SONG_NAME)] - play a song of your choice, or use to resume playback",
-                        inline=False)
-        embed.add_field(name="disconnect", value="[$disconnect] - disconnect from a channel", inline=False)
-        # embed.add_field(name="", value="", inline=False)
-        embed.add_field(name="queue/q", value="[$queue/$q] - shows the queue for the next tracks if present",
-                        inline=False)
-        embed.add_field(name="pause", value="[$pause] - pauses the playback - to resume use $play", inline=False)
-        embed.add_field(name="stop", value="[$stop] - stops the playback", inline=False)
-        # embed.add_field(name="", value="", inline=False)
-        embed.add_field(name="next/skip", value="[$next/$skip] - goes to the next song", inline=False)
-        embed.add_field(name="previous", value="[$previous] - goes back to the previously played song", inline=False)
-        # embed.add_field(name="", value="", inline=False)
-        embed.set_footer(
-            text="Future changes in progress - if you have any ideas contact hiimChaosu#1703 or Kakari#3103")
-        await ctx.send(embed=embed)
-        embed = discord.Embed(
-            title='List of other commands:',
-            colour=ctx.author.colour)
-        # embed.add_field(name="", value="", inline=False)
-        embed.add_field(name="R6",
-                        value="Want to play a game? R6 - I'll ping people with this rank and give you times!",
-                        inline=False)
-        embed.add_field(name="matura", value="Command to remind our friend about her matura exams :)", inline=False)
-        # embed.add_field(name="", value="", inline=False)
-        embed.add_field(name="essa", value="How much of a chill person are You?", inline=False)
-        embed.add_field(name="rasista", value="How much racism is in You? Check it with this command!", inline=False)
-        embed.add_field(name="tlen", value="Check your oxygen reserves", inline=False)
-        embed.set_footer(
-            text="Future changes in progress - if you have any ideas contact hiimChaosu#1703 or Kakari#3103")
-        await ctx.send(embed=embed)
-
     # Rewritten command without a function for matura command
     @commands.command(name="matura")
     async def matura(self, ctx):
