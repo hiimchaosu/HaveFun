@@ -3,7 +3,7 @@ from pathlib import Path
 import discord
 from discord.ext import commands
 
-VERSION = "0.1.3"
+VERSION = "0.2.0"
 
 class HaveFun(commands.Bot):
     def __init__(self):
