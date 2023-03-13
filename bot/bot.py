@@ -3,7 +3,8 @@ from pathlib import Path
 import discord
 from discord.ext import commands
 
-VERSION = "0.2.1"
+VERSION = "0.2.1dev"
+PREFIX = "*"
 
 class HaveFun(commands.Bot):
     def __init__(self):
@@ -60,10 +61,10 @@ class HaveFun(commands.Bot):
     async def on_ready(self):
         self.client_id = (await self.application_info()).id
         print("Bot ready.")
-        await self.change_presence(activity=discord.Game(name=f"v{VERSION} | $help"))
+        await self.change_presence(activity=discord.Game(name=f"v{VERSION} | {PREFIX}help"))
 
     async def prefix(self, bot, msg):
-        return commands.when_mentioned_or("$")(bot, msg)
+        return commands.when_mentioned_or(f"{PREFIX}")(bot, msg)
 
     async def process_commands(self, msg):
         ctx = await self.get_context(msg, cls=commands.Context)
