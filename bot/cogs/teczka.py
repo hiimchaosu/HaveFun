@@ -4,7 +4,9 @@ import random
 from discord.ext import commands
 from pathlib import Path
 
-class teczka(commands.Cog):
+SIXTY = "potwierdzam"
+
+class aktaHF(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
@@ -19,7 +21,12 @@ class teczka(commands.Cog):
         embed.set_image(url=f"attachment://{dowody[choice]}.jpg")
         await ctx.send(file=file, embed=embed)
 
-    #TODO - Podmienic teczke jako akta60-siony - kiedy ktos wpisze "potwierdzam" to wrzucic emotke police i pingnac lolusia
+    @commands.Cog.listener("on_message")
+    async def manIsSixty(self, ctx):
+        ctx.content = ctx.content.lower().replace(' ', '')
+        if SIXTY in ctx.content:
+            await ctx.add_reaction("<a:POLICE:927849013628268545>")
+
 
 def setup(bot):
-    bot.add_cog(teczka(bot))
+    bot.add_cog(aktaHF(bot))
