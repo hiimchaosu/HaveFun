@@ -150,7 +150,6 @@ class Player(wavelink.Player):
         msg = await ctx.send(embed=embed)
         for emoji in list(OPTIONS.keys())[:min(len(tracks), len(OPTIONS))]:
             await msg.add_reaction(emoji)
-
         try:
             reaction, _ = await self.bot.wait_for("reaction_add", timeout=60.0, check=_check)
         except asyncio.TimeoutError:
