@@ -9,12 +9,12 @@ class botCommands(commands.Cog):
         self.bot = bot
 
     @commands.Cog.listener()
-    async def on_message(self, message):
-        print(f"{message.channel}: {message.author}: {message.content}")
-        if message.author == self.bot.user:
+    async def on_message(self, ctx):
+        print(f"{ctx.channel}: {ctx.author}: {ctx.content}")
+        if ctx.author == self.bot.user:
             return
-        if message.channel.id == 746329009691951135 & message.author.id == 300652757000519680 & "jutro" in message.content:
-            await message.channel.send('<:PepeClown:768892735499272222> '.format(message.author.mention))
+        if ctx.channel.id == 746329009691951135 & ctx.author.id == 300652757000519680 & "jutro" in ctx.content:
+            await ctx.channel.send('<:PepeClown:768892735499272222> '.format(ctx.author.mention))
 
     # Rewritten command without a function for matura command
     @commands.command(name="matura")
@@ -25,10 +25,12 @@ class botCommands(commands.Cog):
         await ctx.message.channel.send(
             f'Matury zaczynają się 4 Maja 2022, środa o godz. 9.00. Szykuj dupe <@!697518297096257577>, bo zostało ci {days_left.days} dni.')
 
+
     @commands.command(name="essa")
     async def essa(self, ctx):
         poziom_essy = random.randint(0, 100)
         wariat = format(ctx.message.author.mention)
+
         if poziom_essy <= 20:
             await ctx.message.channel.send(
                 f'Twój poziom essy wynosi: {poziom_essy}%, wariacie, słabo coś dzisiaj {wariat}')
@@ -49,6 +51,7 @@ class botCommands(commands.Cog):
     async def rasista(self, ctx):
         poziom_rasisty = random.randint(0, 100)
         rasista = format(ctx.message.author.mention)
+
         if poziom_rasisty <= 20:
             await ctx.message.channel.send(
                 f'Racism cancelled {poziom_rasisty}% - try your luck next time {rasista} <:brugSad:1012490361257599067>')
@@ -69,6 +72,7 @@ class botCommands(commands.Cog):
     async def tlen(self, ctx):
         poziom_tlenu = random.randint(0, 100)
         oddychacz = format(ctx.message.author.mention)
+
         if poziom_tlenu <= 30:
             await ctx.message.channel.send(
                 f'ALE DUSZNO, TLEN: {poziom_tlenu}% Lepiej łap za butle {oddychacz} <:harambe:1012493211878576259>')
@@ -86,14 +90,14 @@ class botCommands(commands.Cog):
                 f'Tlen nie jest dla {oddychacz} problemem {poziom_tlenu}%! <:xdd:1012493213703082034>')
 
     @commands.command(name="R6")
-    async def R6(self, channel):
+    async def R6(self, ctx):
         emote = "<:kitkuPaf:848926844832186388>"
-        await channel.send(
+        await ctx.send(
             f"It's time for a game of R6 honey: {emote} <@&754314805438840955> {emote}")
-        message_R6 = [await channel.send("19.30-20.00"),
-                      await channel.send("20.00-20.30"),
-                      await channel.send("20.30-21.00"),
-                      await channel.send("Pass aka <@!300652757000519680> mówiący jutro")]
+        message_R6 = [await ctx.send("19.30-20.00"),
+                      await ctx.send("20.00-20.30"),
+                      await ctx.send("20.30-21.00"),
+                      await ctx.send("Pass aka <@!300652757000519680> mówiący jutro")]
         for i in message_R6:
             await i.add_reaction("<:GHOk:793607140735451156>")
 
