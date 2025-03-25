@@ -1,26 +1,12 @@
-import discord
-from discord.ext import commands
-import datetime
-import random
+import nextcord
+from nextcord.ext import commands
+from data import functions
+from table2ascii import table2ascii as t2a, PresetStyle
+import calendar
 
 class botCommands(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-
-    def rngLevel(self):
-        RNGCreate = random.randint(0,100)
-        RNGOption = [0,1,2,3,4]
-        print(RNGOption[0])
-        if RNGCreate <= 20:
-            return RNGOption[0], RNGCreate
-        elif 20 < RNGCreate < 60:
-            return RNGOption[1], RNGCreate
-        elif 60 <= RNGCreate <= 95:
-            return RNGOption[2], RNGCreate
-        elif 96 <= RNGCreate <= 99:
-            return RNGOption[3], RNGCreate
-        else:
-            return RNGOption[4], RNGCreate
 
     @commands.Cog.listener()
     async def on_message(self, ctx):
@@ -31,17 +17,15 @@ class botCommands(commands.Cog):
             await ctx.channel.send('<:PepeClown:768892735499272222> '.format(ctx.author.mention))
 
     # Rewritten command without a function for matura command
-    @commands.command(name="matura")
+    @commands.command(name="matura", description="Command to remind our friend about her matura exams :)")
     async def matura(self, ctx):
-        current_date = datetime.date.today()
-        target_date = datetime.date(2022, 5, 4)
-        days_left = target_date - current_date
         await ctx.message.channel.send(
-            f'Matury zaczynają się 4 Maja 2022, środa o godz. 9.00. Szykuj dupe <@!697518297096257577>, bo zostało ci {days_left.days} dni.')
+            f'Matury zaczynają się 4 Maja 2022, środa o godz. 9.00. Szykuj dupe <@!697518297096257577>, bo zostało ci {functions.daysLeftToMatura()} dni.'
+        )
 
-    @commands.command(name="essa")
+    @commands.command(name="essa", description="How much of a chill person are You?")
     async def essa(self, ctx):
-        OPTION, PERCENTAGE = self.rngLevel()
+        OPTION, PERCENTAGE = functions.rngLevel()
         Author = format(ctx.message.author.mention)
         ELevel = [
             f"Twój poziom essy wynosi: {PERCENTAGE}%, wariacie, słabo coś dzisiaj {Author}",
@@ -52,9 +36,9 @@ class botCommands(commands.Cog):
         ]
         await ctx.send(ELevel[OPTION])
 
-    @commands.command(name="rasista")
+    @commands.command(name="rasista", description="How much racism is in You?")
     async def rasista(self, ctx):
-        OPTION, PERCENTAGE = self.rngLevel()
+        OPTION, PERCENTAGE = functions.rngLevel()
         Author = format(ctx.message.author.mention)
         RLevel = [
             f"Racism cancelled {PERCENTAGE}% - try your luck next time {Author} <:brugSad:1012490361257599067>",
@@ -65,9 +49,9 @@ class botCommands(commands.Cog):
         ]
         await ctx.send(RLevel[OPTION])
 
-    @commands.command(name="tlen")
+    @commands.command(name="tlen", description="Check your oxygen reserves!")
     async def tlen(self, ctx):
-        OPTION, PERCENTAGE = self.rngLevel()
+        OPTION, PERCENTAGE = functions.rngLevel()
         Author = format(ctx.message.author.mention)
         TLevel = [
             f"ALE DUSZNO, TLEN: {PERCENTAGE}% Lepiej łap za butle {Author} <:harambe:1012493211878576259>",
@@ -78,22 +62,53 @@ class botCommands(commands.Cog):
         ]
         await ctx.send(TLevel[OPTION])
 
-    @commands.command(name="R6")
+    @commands.command(name="R6", description="Want to play a game? R6 - I'll ping people with this rank and give you times!")
     async def R6(self, ctx):
         emote = "<:kitkuPaf:848926844832186388>"
         await ctx.send(
             f"It's time for a game of R6 honey: {emote} <@&754314805438840955> {emote}")
-        message_R6 = [await ctx.send("19.30-20.00"),
-                      await ctx.send("20.00-20.30"),
-                      await ctx.send("20.30-21.00"),
-                      await ctx.send("Pass aka <@!300652757000519680> mówiący jutro")]
+        message_R6 = [
+            await ctx.send("19.30-20.00"),
+            await ctx.send("20.00-20.30"),
+            await ctx.send("20.30-21.00"),
+            await ctx.send("Pass aka <@!300652757000519680> mówiący jutro")
+        ]
         for i in message_R6:
             await i.add_reaction("<:GHOk:793607140735451156>")
+
+    @commands.command(name="calendar", description="X")
+    async def calendar(self, ctx):
+        yy = int(functions.thisYear())
+        mm = int(functions.thisMonth())
+        cal = calendar.monthcalendar(yy, mm)
+        days = ["Pn", "Wt", "Sr", "Czw", "Pt", "Sob", "Ndz"]
+        events = functions.calendarEvents()
+        for week in cal:
+            for i, day in enumerate(week):
+                if day in events:
+                    week[i] = f"*{day}*"
+
+        output = t2a(
+            header=days,
+            body=cal,
+            style=PresetStyle.double_thin_box,
+            first_col_heading=False
+        )
+        await ctx.send(f"```css\n{output}\n```")
+        await ctx.send(events)
+
+    @commands.command(name="eventadd", description="X")
+    async def eventadd(self, ctx, number):
+        if number.isnumeric():
+            functions.calendarEventsAdd(number)
+            await ctx.send(f"```css\nEvent added.\n```")
+        else:
+            await ctx.send(f"You must type in a number.")
 
     # For future bug and function testing
     @commands.command(name="check")
     async def checkCommand(self, ctx):
-        pass
+        await ctx.send(functions.testPurposes())
 
 
 def setup(bot):

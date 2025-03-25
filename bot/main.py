@@ -1,9 +1,9 @@
 from pathlib import Path
 
-import discord
-from discord.ext import commands
+import nextcord
+from nextcord.ext import commands
 
-VERSION = "0.3.0dev"
+VERSION = "0.4.0dev"
 PREFIX = "*"
 
 class HaveFun(commands.Bot):
@@ -13,7 +13,7 @@ class HaveFun(commands.Bot):
             command_prefix=self.prefix,
             case_insensitive=True,
             help_command=None,
-            intents=discord.Intents.all()
+            intents=nextcord.Intents.all()
         )
 
     def setup(self):
@@ -61,7 +61,7 @@ class HaveFun(commands.Bot):
     async def on_ready(self):
         self.client_id = (await self.application_info()).id
         print("Bot ready.")
-        await self.change_presence(activity=discord.Game(name=f"v{VERSION} | {PREFIX}help"))
+        await self.change_presence(activity=nextcord.Game(name=f"v{VERSION} | {PREFIX}help"))
 
     async def prefix(self, bot, msg):
         return commands.when_mentioned_or(f"{PREFIX}")(bot, msg)
