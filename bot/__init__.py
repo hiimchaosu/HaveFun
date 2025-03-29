@@ -1,1 +1,1 @@
-from .bot import HaveFun
+from .main import HaveFun

@@ -11,13 +11,17 @@ class Events(commands.Cog):
         message.content = message.content.lower().replace(' ', '')
         if 'widziszmnie?' in message.content:
             await message.channel.send("Widzeee {0}".format(message.author.mention),
-                                       file=discord.File('images/brek.jpeg'))
-
-    @commands.Cog.listener("on_message")
+                                       file=discord.File('../images/brek.jpeg'))
     async def kazdyJeden(self, message):
         if "@everyone" in message.content:
             await message.channel.send('<:ping:768891917848281119> {0}'.format(message.author.mention))
 
 
-def setup(bot):
-    bot.add_cog(Events(bot))
+async def setup(bot):
+    if bot.config["test-server-id"] == "":
+        await bot.add_cog(Events(bot))
+    else:
+        await bot.add_cog(
+            Events(bot),
+            guild = discord.Object(id=bot.config["test-server-id"])
+        )

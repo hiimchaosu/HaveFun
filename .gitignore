@@ -6,3 +6,4 @@ token.0
 venv
 # Skip audio files
 *.mp3
+/images/*
