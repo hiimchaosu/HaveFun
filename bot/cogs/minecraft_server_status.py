@@ -45,7 +45,6 @@ class mcserverstatus(commands.Cog):
         else:
             self.last_status_message = await ctx.send(embed=embed)
 
-
     @commands.command(
         name="MCStatus",
         help="Is the HENTAI ANARCHY server on?"
@@ -53,13 +52,23 @@ class mcserverstatus(commands.Cog):
     async def mcstatus(self, ctx):
         await self.send_update_status(ctx.channel)
 
-    @tasks.loop(hours=1)
+    @commands.command(name="force_update")
+    async def force_update(self, ctx):
+        """Manually force an update to test the loop."""
+        channel = self.bot.get_channel(self.status_channel_id)
+        if not channel:
+            await ctx.send("❌ ERROR: Channel not found.")
+            return
+        await self.send_update_status(channel)
+        await ctx.send("✅ Status manually updated!")
+
+    @tasks.loop(minutes=30)
     async def status_loop(self):
-        """Runs every hour to update the status message."""
-        await self.bot.wait_until_ready()  # Ensure bot is fully ready
+        """Runs every 30 minutes to update the status message."""
+        await self.bot.wait_until_ready()
         channel = self.bot.get_channel(self.status_channel_id)
         if channel:
-            await self.MCStatus(channel)
+            await self.send_update_status(channel)
 
     @status_loop.before_loop
     async def before_status_loop(self):
