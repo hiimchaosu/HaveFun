@@ -10,18 +10,24 @@ class help(commands.Cog):
     @commands.command(
         name="help",
         aliases=["h"],
-        description="Show all the commands"
+        help="List all the commands"
     )
     async def help_command(self, ctx):
         embed = discord.Embed(
-            title='Commands available: ',
+            title='📜 Command List: ',
             colour=ctx.author.colour)
         embed.set_author(name="hiimChaosu", icon_url="https://avatars.githubusercontent.com/u/25712415?v=4",
                          url="https://github.com/hiimchaosu")
-        for command in self.bot.walk_commands():
-            embed.add_field(name=f"{PREFIX}{command}", value=f"", inline=False)
+        categories = {}
+        for command in self.bot.commands:
+            category = command.extras.get("category", "Other")  # Get category, default to 'Other'
+            if category not in categories:
+                categories[category] = []
+            categories[category].append(f"**`{command.name}`** - {command.help or 'No description found'}")
+        for category, commands_list in categories.items():
+            embed.add_field(name=f"🔹 {category}\n────────────────────────────────", value="\n".join(commands_list), inline=False)
         embed.set_footer(
-            text="Future changes in progress - if you have any ideas contact hiimChaosu#1703")
+            text="Future changes in progress - if you have any ideas contact hiimChaosu")
         await ctx.send(embed=embed)
 
 async def setup(bot):
