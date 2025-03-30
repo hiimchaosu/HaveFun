@@ -1,9 +1,9 @@
 # Skip all logging files
 logs
-# Skip HaveFun token
-token.0
 # Skip venv
 venv
 # Skip audio files
 *.mp3
 /images/*
+#skip config.json due to vulnerable info
+config.json
