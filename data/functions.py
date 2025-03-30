@@ -24,29 +24,17 @@ def daysLeftToMatura():
     days_left = target_date - current_date
     return days_left
 
-def thisDay():
+def get_date_info():
+    """Returns today's date in multiple formats."""
     date = datetime.date.today()
-    day = date.strftime("%d")
-    return day
-
-def thisMonth():
-    date = datetime.date.today()
-    month = date.strftime("%m")
-    return month
-
-def thisMonthName():
-    date = datetime.date.today()
-    monthName = date.strftime("%B")
-    return monthName
-
-def thisYear():
-    date = datetime.date.today()
-    year = date.strftime("%Y")
-    return year
-
-def thisMonthDays():
-    monthDays = (calendar.monthrange(int(thisYear()), int(thisMonth()))[1])
-    return monthDays
+    today = date.today()
+    return {
+        "day": today.strftime("%d"),
+        "month": today.strftime("%m"),
+        "month_name": today.strftime("%B"),
+        "year": today.strftime("%Y"),
+        "monthDays": calendar.monthrange(int(today.strftime("%Y")), int(today.strftime("%m")))[1]
+    }
 
 def calendarEvents():
     return event_days
