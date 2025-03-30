@@ -22,7 +22,7 @@ class aktaHF(commands.Cog):
         description="Check the archives of HF"
     )
     async def teczkaCommand(self, ctx):
-        dowody = [p.stem for p in Path(".").glob("./images/teczka/*")]
+        dowody = [p.stem for p in Path(".").glob("../images/teczka/*")]
         choice = random.randint(0, len(dowody)-1)
 
         file = discord.File(f"./images/teczka/{dowody[choice]}.jpg", filename=f"{dowody[choice]}.jpg")
