@@ -19,16 +19,19 @@ class botCommands(Cog):
 
     @commands.command(
         name="matura",
-        description="Command to remind our friend about her matura exams :)"
+        help="Command to remind our friend about her matura exams :)",
+        extras = {"category": "Fun"}
     )
     async def matura(self, ctx):
         await ctx.message.channel.send(
             f'Matury zaczynają się 4 Maja 2022, środa o godz. 9.00. Szykuj dupe <@!697518297096257577>, bo zostało ci {functions.daysLeftToMatura()} dni.'
         )
 
+
     @commands.command(
         name="essa",
-        description="How much of a chill person are You?"
+        help="How much of a chill person are You?",
+        extras = {"category": "Fun"}
     )
     async def essa(self, ctx):
         OPTION, PERCENTAGE = functions.rngLevel()
@@ -44,7 +47,8 @@ class botCommands(Cog):
 
     @commands.command(
         name="rasista",
-        description="How much racism is in You?"
+        help="How much racism is in You?",
+        extras = {"category": "Fun"}
     )
     async def rasista(self, ctx):
         OPTION, PERCENTAGE = functions.rngLevel()
@@ -60,7 +64,8 @@ class botCommands(Cog):
 
     @commands.command(
         name="tlen",
-        description="Check your oxygen reserves!"
+        help="Check your oxygen reserves!",
+        extras = {"category": "Fun"}
     )
     async def tlen(self, ctx):
         OPTION, PERCENTAGE = functions.rngLevel()
@@ -76,7 +81,8 @@ class botCommands(Cog):
 
     @commands.command(
         name="R6",
-        description="Want to play a game? R6 - I'll ping people with this rank and give you times!"
+        help="Want to play a game? R6 - I'll ping people with this rank and give you times!",
+        extras = {"category": "Fun"}
     )
     async def R6(self, ctx):
         emote = "<:kitkuPaf:848926844832186388>"
@@ -93,11 +99,13 @@ class botCommands(Cog):
 
     @commands.command(
         name="calendar",
-        description="X"
+        help="",
+        extras = {"category": "Calendar(WIP)"}
     )
     async def calendar(self, ctx):
-        yy = int(functions.thisYear())
-        mm = int(functions.thisMonth())
+        date_info = functions.get_date_info()
+        yy = int(date_info["year"])
+        mm = int(date_info["month"])
         cal = calendar.monthcalendar(yy, mm)
         days = ["Pn", "Wt", "Sr", "Czw", "Pt", "Sob", "Ndz"]
         events = functions.calendarEvents()
@@ -117,7 +125,8 @@ class botCommands(Cog):
 
     @commands.command(
         name="eventadd",
-        description="X"
+        help="",
+        extras = {"category": "Calendar(WIP)"}
     )
     async def eventadd(self, ctx, number):
         if number.isnumeric():
@@ -129,7 +138,8 @@ class botCommands(Cog):
     # For future bug and function testing
     @commands.command(
         name="check",
-        description="Mostly a command for checking stuff (WIP)"
+        help="Mostly a command for checking stuff (WIP)",
+        extras = {"category": "Troubleshoot"}
     )
     async def checkCommand(self, ctx):
         await ctx.send("Checkmate")
