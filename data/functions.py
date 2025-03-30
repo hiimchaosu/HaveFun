@@ -1,6 +1,7 @@
 import random
 import datetime
 import calendar
+from mcstatus import JavaServer
 
 event_days = []
 
@@ -44,3 +45,30 @@ def calendarEventsAdd(number):
 
 def testPurposes():
     pass
+
+def get_mc_server_info(host: str, port: str):
+    try:
+        server = JavaServer.lookup(f"{host}:{port}")
+        status = server.status()
+
+        players = status.players.online
+        max_players = status.players.max
+        motd = status.description
+        latency = status.latency
+        tps = getattr(status, "tps", "N/A")
+
+        player_list = []
+        if status.players.sample:
+            player_list = [player.name for player in status.players.sample]
+
+        return {
+            "online": True,
+            "players_online": players,
+            "max_players": max_players,
+            "motd": motd,
+            "latency": latency,
+            "tps": tps,
+            "players": player_list
+        }
+    except Exception:
+        return {"online": False}
