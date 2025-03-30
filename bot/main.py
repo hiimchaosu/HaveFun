@@ -4,7 +4,7 @@ from pathlib import Path
 import discord
 from discord.ext import commands
 
-VERSION = "0.4.0dev"
+VERSION = "0.4.2dev"
 PREFIX = "*"
 
 class HaveFun(commands.Bot):
@@ -15,7 +15,6 @@ class HaveFun(commands.Bot):
             help_command=None,
             intents=discord.Intents.all()
         )
-
         self.config = config
 
     async def setup_hook(self):
@@ -38,7 +37,6 @@ class HaveFun(commands.Bot):
         self.client_id = (await self.application_info()).id
         print("Bot ready.")
         await self.change_presence(activity=discord.CustomActivity(name=f"v{VERSION} | {PREFIX}help"))
-
 
 if __name__ == "__main__":
     config = json.loads(open("../data/config.json").read())
