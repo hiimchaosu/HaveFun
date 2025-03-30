@@ -2,3 +2,12 @@
     "token": "<INSERT YOUR TOKEN HERE>",
     "test-server-id": ""
 }
+{
+    "token": "<INSERT YOUR TOKEN HERE>",
+    "test-server-id": "",
+    "twitter_link": "https://x.com/",
+    "twitter_link_fixed": "https://fixvx.com",
+    "mcserverip": "<INSERT YOUR MINECRAFT SERVER IP>",
+    "mcserverport": "<INSERT YOUR MINECRAFT SERVER PORT>",
+    "mcserverchannelID": "<INSERT YOUR DISCORD CHANNEL ID>"
+}
