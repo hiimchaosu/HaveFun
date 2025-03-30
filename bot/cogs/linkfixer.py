@@ -2,7 +2,6 @@ import discord
 import json
 from discord.ext import commands
 
-#TODO - make it a little bit less hardcoded, ok?
 config = json.loads(open("../data/config.json").read())
 class twitterFixer(commands.Cog):
     def __init__(self, bot):
