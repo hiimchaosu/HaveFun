@@ -4,7 +4,7 @@ from pathlib import Path
 import discord
 from discord.ext import commands
 
-VERSION = "0.4.2dev"
+VERSION = "0.7.3v"
 PREFIX = "*"
 
 class HaveFun(commands.Bot):
@@ -20,7 +20,9 @@ class HaveFun(commands.Bot):
     async def setup_hook(self):
         print("### SETTING UP COGS ###")
         for file in Path("cogs").glob("*.py"):
-            cog_name = file.name.split(".")[0]
+            cog_name = file.stem
+            if cog_name == "__init__":
+                continue
             await self.load_extension(f"cogs.{cog_name}")
             print("Loaded extension:", file.name)
 
@@ -39,6 +41,6 @@ class HaveFun(commands.Bot):
         await self.change_presence(activity=discord.CustomActivity(name=f"v{VERSION} | {PREFIX}help"))
 
 if __name__ == "__main__":
-    config = json.loads(open("../data/config.json").read())
+    config = json.loads(open("/app/data/config.json").read())
     bot = HaveFun(config)
     bot.run(config["token"])
