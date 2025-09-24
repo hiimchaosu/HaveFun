@@ -1,9 +1,15 @@
 {
     "token": "<INSERT YOUR TOKEN HERE>",
     "test-server-id": "",
-    "twitter_link": "https://x.com/",
-    "twitter_link_fixed": "https://fixvx.com",
+    "x_link": "https://x.com/",
+    "x_link_fixed": "https://fixvx.com/",
+    "twitter_link": "https://twitter.com/",
+    "twitter_link_fixed": "https://fxtwitter.com/",
+    "instagram_link": "https://www.instagram.com/reel/",
+    "instagram_link_fixed": "https://www.kkinstagram.com/reel/",
     "mcserverip": "<INSERT YOUR MINECRAFT SERVER IP>",
     "mcserverport": "<INSERT YOUR MINECRAFT SERVER PORT>",
-    "mcserverchannelID": "<INSERT YOUR DISCORD CHANNEL ID>"
+    "mcserverchannelID": "<INSERT YOUR DISCORD CHANNEL ID>",
+    "openrouter_token": "{TOKEN HERE}",
+    "ownerID": ownerIdHere
 }
