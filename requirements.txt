@@ -1,0 +1,5 @@
+discord.py
+table2ascii
+mcstatus
+aiohttp
+asyncssh
