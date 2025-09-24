@@ -12,8 +12,7 @@ class aktaHF(commands.Cog):
 
     @commands.Cog.listener("on_message")
     async def manIsSixty(self, ctx):
-        ctx.content = ctx.content.lower().replace(' ', '')
-        if SIXTY in ctx.content:
+        if SIXTY in ctx.content.lower().replace(' ', ''):
             await ctx.add_reaction("<a:POLICE:927849013628268545>")
             await ctx.channel.send("Co robisz?<:gun:668879124554579988>")
 
@@ -22,14 +21,19 @@ class aktaHF(commands.Cog):
         description="Check the archives of HF"
     )
     async def teczkaCommand(self, ctx):
-        dowody = [p.stem for p in Path(".").glob("../images/teczka/*")]
-        choice = random.randint(0, len(dowody)-1)
+        try:
+            dowody = [p.stem for p in Path(".").glob("app/images/teczka/*")]
+            choice = random.randint(0, len(dowody)-1)
 
-        file = discord.File(f"./images/teczka/{dowody[choice]}.jpg", filename=f"{dowody[choice]}.jpg")
-        embed = discord.Embed()
-        embed.set_author(name=f"Akta HF - {dowody[choice]}")
-        embed.set_image(url=f"attachment://{dowody[choice]}.jpg")
-        await ctx.send(file=file, embed=embed)
+            file = discord.File(f"app/images/teczka/{dowody[choice]}.jpg", filename=f"{dowody[choice]}.jpg")
+            embed = discord.Embed()
+            embed.set_author(name=f"Akta HF - {dowody[choice]}")
+            embed.set_image(url=f"attachment://{dowody[choice]}.jpg")
+            await ctx.send(file=file, embed=embed)
+        except Exception:
+            embed = discord.Embed()
+            embed.set_author(name=f"Akta HF - Empty")
+            await ctx.send(embed=embed)
 
 async def setup(bot):
     if bot.config["test-server-id"] == "":
