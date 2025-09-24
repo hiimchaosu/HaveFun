@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  discordbot:
+    container_name: discordbot
+    build: /srv/<disk>/discord_bot/app
+    restart: unless-stopped
+    working_dir: /app/bot
+    volumes:
+      - /srv/<disk>/discord_bot/app:/app
+    command: python3 main.py
+    environment:
+      - PYTHONPATH=/app
