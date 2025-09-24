@@ -11,7 +11,7 @@ class botCommands(Cog):
 
     @commands.Cog.listener()
     async def on_message(self, ctx):
-        print(f"{ctx.channel}: {ctx.author}: {ctx.content}")
+        #print(f"{ctx.channel}: {ctx.author}: {ctx.content}")
         if ctx.author == self.bot.user:
             return
         if ctx.channel.id == 746329009691951135 & ctx.author.id == 300652757000519680 & "jutro" in ctx.content:
