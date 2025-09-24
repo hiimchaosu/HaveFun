@@ -1,0 +1,6 @@
+{
+    "HOST": "<IP>",
+    "USER": "vintagestorybot",
+    "KEY_PATH": "/app/.ssh/id_ed25519",
+    "VS_COMMAND": "sudo -u vintagestory /home/vintagestory/server/server.sh"
+}
